@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  business-analytics:
+    build: .
+    container_name: enterprise-analytics-engine
+    restart: unless-stopped
+    
+    # Business application environment variables
+    environment:
+      - SERVICE_NAME=business-analytics-service
+      - COMPANY_ENV=production
+      - DATA_PROCESSING_MODE=batch
+      - ANALYTICS_ENABLED=true
+      - TZ=UTC
+    
+    # Volumes for business data and logs persistence
+    volumes:
+      - ./logs:/var/log/supervisor
+      - ./analytics-logs:/var/log/business-analytics-service
+      - ./business-data:/opt/business-data
+      - ./reports:/opt/reports
+    
+    # Network configuration for enterprise deployment
+    network_mode: host  # Enterprise network access
+    
+    # Security context for business applications
+    privileged: false
+    user: root
+    
+    # Business service health monitoring
+    healthcheck:
+      test: ["/app/health-check.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    # Enterprise logging configuration
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=business-analytics"
+    
+    # Labels for enterprise deployment identification
+    labels:
+      - "service=business-analytics-engine"
+      - "department=data-analytics"
+      - "environment=production"
+      - "company=enterprise-solutions"
+      - "aws.ecs.capability.docker-remote-api.1.19=true"
+      - "aws.ecs.capability.privileged=false"
+
+# Optional: Create named volumes for log persistence
+volumes:
+  logs:
+    driver: local
+  app-logs:
+    driver: local
+
+# Network configuration (if not using host networking)
+networks:
+  default:
+    driver: bridge

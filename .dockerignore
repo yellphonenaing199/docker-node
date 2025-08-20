@@ -1,0 +1,59 @@
+# Docker ignore file for AWS node-package runner
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Documentation and readme files
+README.md
+*.md
+docs/
+
+# Log files
+*.log
+logs/
+app-logs/
+
+# Temporary files
+tmp/
+*.tmp
+*.temp
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node.js (if any)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python cache (if any)
+__pycache__/
+*.pyc
+*.pyo
+
+# Build artifacts
+build/
+dist/
+
+# Environment files (keep only .env.example)
+.env
+.env.local
+.env.production
+
+# Docker files (except Dockerfile)
+docker-compose.override.yml
+.dockerignore
+
+# AWS specific
+.aws/
+aws-config/
+
+# Backup files
+*.bak
+*.backup
