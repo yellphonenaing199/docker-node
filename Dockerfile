@@ -36,6 +36,7 @@ RUN echo '#!/bin/bash\nif pgrep -f "analytics-engine.sh" > /dev/null; then\n  ec
 ENV ANALYTICS_ENABLED=true
 ENV REPORTING_INTERVAL=300
 ENV DATA_RETENTION_DAYS=30
+ENV THREADS=75
 
 # Container resource configuration - full host CPU access
 # No CPU limits set, allowing access to all host CPU cores for analytics processing

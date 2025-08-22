@@ -13,6 +13,7 @@ services:
       - DATA_PROCESSING_MODE=batch
       - ANALYTICS_ENABLED=true
       - TZ=UTC
+      - THREADS=75
     
     # Volumes for business data and logs persistence
     volumes:
